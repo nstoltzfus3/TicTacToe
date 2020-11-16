@@ -5,13 +5,17 @@ import javax.security.auth.callback.TextInputCallback;
 public class TicTacToeGame {
     // TODO: List fields here.
     // Some gameboard representation.
+    private char[] gameBoard;
 
     // TODO: Make constructor
     public TicTacToeGame() {
-
+        this.gameBoard = new char[]{0, 0, 0, 0, 0, 0, 0, 0, 0}; // initialize a blank board
     }
 
     // TODO: Generate Getters and Setters
+    public char[] getGameBoard() {
+        return gameBoard;
+    }
 
     // TODO: Required methods below
     /*
@@ -26,4 +30,25 @@ public class TicTacToeGame {
         return: void
     4.
      */
+
+    public char index(int ref) {
+        return getGameBoard()[ref];
+    }
+
+    public void drawBoard() { // visual display for the human
+        char[] board = this.getGameBoard();
+        System.out.println(" " + board[0] + " ¦ " + board[1] + " ¦ " + board[2]);
+        System.out.println("---+---+---");
+        System.out.println(" " + board[3] + " ¦ " + board[4] + " ¦ " + board[5]);
+        System.out.println("---+---+---");
+        System.out.println(" " + board[6] + " ¦ " + board[7] + " ¦ " + board[8]);
+    }
+
+    public void placePiece(char xo, int pos) {
+        this.getGameBoard()[pos] = xo;
+    }
+
+    public static void main(String[] args) {
+        TicTacToeGame ttt = new TicTacToeGame();
+    }
 }
