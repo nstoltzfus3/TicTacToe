@@ -1,6 +1,8 @@
 package com.nick.ttt;
 
 import javax.security.auth.callback.TextInputCallback;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TicTacToeGame {
     // TODO: List fields here.
@@ -9,7 +11,7 @@ public class TicTacToeGame {
 
     // TODO: Make constructor
     public TicTacToeGame() {
-        this.gameBoard = new char[]{0, 0, 0, 0, 0, 0, 0, 0, 0}; // initialize a blank board
+        this.gameBoard = new char[]{0, 0, 0, 0, 0, 0, 0, 0, 0}; // initialize a blank "board"
     }
 
     // TODO: Generate Getters and Setters
@@ -46,6 +48,17 @@ public class TicTacToeGame {
 
     public void placePiece(char xo, int pos) {
         this.getGameBoard()[pos] = xo;
+    }
+
+    public ArrayList<Integer> findEmpties() {
+        ArrayList<Integer> empties = new ArrayList<>();
+        char[] board = this.getGameBoard();
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == 0) {
+                empties.add(i);
+            }
+        }
+        return empties;
     }
 
     public static void main(String[] args) {
