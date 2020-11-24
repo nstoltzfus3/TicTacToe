@@ -69,11 +69,7 @@ public class TicTacToeGame {
     }
 
     public void placePiece(char xo, int pos) {
-        if (this.findEmpties().contains(pos)) {
-            this.getGameBoard()[pos] = xo;
-        } else {
-            System.out.println("Not a valid move. Pick another position.");
-        }
+        this.getGameBoard()[pos] = xo;
     }
 
     public ArrayList<Integer> findEmpties() {
