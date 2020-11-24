@@ -13,6 +13,13 @@ public class TicTacToeGame {
     public TicTacToeGame() {
         this.gameBoard = new char[]{0, 0, 0, 0, 0, 0, 0, 0, 0}; // initialize a blank "board"
     }
+    //constructor to let you setup non empty gameboards
+    public TicTacToeGame(char[] board){
+        this.gameBoard = new char[9];
+        for(int i=0; i < board.length; i++){
+            this.gameBoard[i] = board[i];
+        }
+    }
 
     // TODO: Generate Getters and Setters
     public char[] getGameBoard() {
