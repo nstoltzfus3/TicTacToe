@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UnitTests {
     TicTacToeGame game = new TicTacToeGame();
-    
+
     //passes IFF
     //The board gets updated with the new piece
     @Test
@@ -50,8 +50,8 @@ class UnitTests {
     //a helper method for findEmpties()
     boolean validateEmpties(TicTacToeGame board){
         //empty character is declared in case it is refactored.
-        //originally I put the value in the loop but interestingly '0'==0 returns false
-        //while '0'==(char) 0 returns true.
+        //originally I put the value in the loop but interestingly '0'==0 even if they are both chars
+        //while 0==(char) 0 returns true.
         //since an empty game board is initialized as charArray of 0 not a charArray of '0' this matters
         char empty = 0;
         char[] boardChars = board.getGameBoard();
