@@ -93,16 +93,17 @@ class TicTacToeGameTest {
 //            emptyX.sort();
 //            emptyO.sort();
             //doing it in separate loops in case there is a situation where they have different sizes
-            for(int j=0; j < emptyX.size(); j++){
+            for(int j=i+1; j < emptyX.size(); j++){
                 //compare emptyX to to testXboard
                 //the ORDER the arraylist are NOT the same, but they should have the same values but in different places
                 //see if every location in emptyX is found in testXBoard
-                emptyX.indexOf(testXBoards.get(i).getGameBoard()[j]);
-                assertTrue();
+                //Xtest
+              //  System.out.println("current Xboard " + testXBoards.get(i).getGameBoard().toString() + " current emptyX " + emptyX.toString());
+                assertTrue(emptyX.contains(testXBoards.get(i).getGameBoard()[j]));
+                //Otest
+                assertTrue(emptyO.contains(testOBoards.get(i).getGameBoard()[j]));
             }
-            for(int j=0; j < emptyO.size(); j++){
 
-            }
         }
 
     }
