@@ -1,5 +1,6 @@
 package com.nick.ttt;
 
+import javax.security.auth.kerberos.KerberosTicket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,8 +10,29 @@ public class TicTacToeBoard {
     private ArrayList<int[]> winConditions;
     private HashMap<Character, Integer> charToInt;
 
+
+
     public TicTacToeBoard() {
         this.board = new char[]{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+        this.initializeWinConditions();
+        this.initializeCharToInts();
+    }
+
+    public TicTacToeBoard(char[] board){
+        this.initializeWinConditions();
+        this.initializeCharToInts();
+        this.board = new char[9];
+        for(int i=0; i < board.length; i++){
+            this.board[i] = board[i];
+        }
+    }
+
+    // TODO: Generate Getters and Setters
+    public char[] getBoard() {
+        return this.board;
+    }
+
+    public void initializeWinConditions() {
         this.winConditions = new ArrayList<>();
         this.winConditions.add(new int[]{0, 1, 2});
         this.winConditions.add(new int[]{3, 4, 5});
@@ -20,24 +42,16 @@ public class TicTacToeBoard {
         this.winConditions.add(new int[]{2, 5, 8});
         this.winConditions.add(new int[]{0, 4, 8});
         this.winConditions.add(new int[]{2, 4, 6});
+    }
+
+    public void initializeCharToInts() {
         this.charToInt = new HashMap<>();
         charToInt.put('x', -1);
         charToInt.put('o', 1);
         charToInt.put(' ', 0);
     }
 
-    public TicTacToeBoard(char[] board){
-        this.board = new char[9];
-        for(int i=0; i < board.length; i++){
-            this.board[i] = board[i];
-        }
-        winConditions = null;
-    }
 
-    // TODO: Generate Getters and Setters
-    public char[] getBoard() {
-        return this.board;
-    }
 
     public ArrayList<int[]> getWinConditions() {
         return this.winConditions;
