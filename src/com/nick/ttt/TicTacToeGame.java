@@ -1,51 +1,32 @@
 package com.nick.ttt;
 
 import javax.security.auth.callback.TextInputCallback;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
+
 
 public class TicTacToeGame {
     // TODO: List fields here.
     // Some gameboard representation.
-    private char[] gameBoard;
+
+    private TicTacToeBoard gameBoard;
+    private Player[] players;
 
     // TODO: Make constructor
     public TicTacToeGame() {
-        this.gameBoard = new char[]{0, 0, 0, 0, 0, 0, 0, 0, 0}; // initialize a blank "board"
-    }
-    //constructor to let you setup non empty gameboards
-    public TicTacToeGame(char[] board){
-        this.gameBoard = new char[9];
-        for(int i=0; i < board.length; i++){
-            this.gameBoard[i] = board[i];
-        }
+        this.gameBoard = new TicTacToeBoard();
+
     }
 
-    // TODO: Generate Getters and Setters
-    public char[] getGameBoard() {
-        return gameBoard;
+    public TicTacToeBoard getGameBoard() {
+        return this.gameBoard;
     }
-
-    // TODO: Required methods below
-    /*
-    1. Be able to index to a specific square.
-        index(<some reference to a position>)
-        return: value at that position
-    2. Detect the end of a game. Returns true if the game is over.
-        gameIsOver()
-        return: boolean
-    3. Method to place a piece on the board.
-        placePiece(<piece X or O>, <position>)
-        return: void
-    4.
-     */
 
     public char index(int ref) {
-        return getGameBoard()[ref];
+        return this.getGameBoard().getBoard()[ref];
     }
 
     public void drawBoard() { // visual display for the human
-        char[] board = this.getGameBoard();
+        char[] board = this.getGameBoard().getBoard();
         System.out.println(" " + board[0] + " ¦ " + board[1] + " ¦ " + board[2]);
         System.out.println("---+---+---");
         System.out.println(" " + board[3] + " ¦ " + board[4] + " ¦ " + board[5]);
@@ -53,20 +34,7 @@ public class TicTacToeGame {
         System.out.println(" " + board[6] + " ¦ " + board[7] + " ¦ " + board[8]);
     }
 
-    public void placePiece(char xo, int pos) {
-        this.getGameBoard()[pos] = xo;
-    }
 
-    public ArrayList<Integer> findEmpties() {
-        ArrayList<Integer> empties = new ArrayList<>();
-        char[] board = this.getGameBoard();
-        for (int i = 0; i < board.length; i++) {
-            if (board[i] == 0) {
-                empties.add(i);
-            }
-        }
-        return empties;
-    }
 
     public static void main(String[] args) {
         TicTacToeGame ttt = new TicTacToeGame();

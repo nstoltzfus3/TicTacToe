@@ -1,69 +1,66 @@
 package com.nick.ttt;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class UnitTests {
-    TicTacToeGame game = new TicTacToeGame();
-
-    //passes IFF
-    //The board gets updated with the new piece
+    /**
+     * Tests placing a single piece on an empty board.
+     */
+>>>>>>> upstream/nickChanges
     @Test
     void placePiece() {
-        //test 'X'
-        for(int i=0; i<game.getGameBoard().length; i++){
-            game.placePiece('X', i);
-            assertEquals('X', game.index(i));
+        TicTacToeGame game = new TicTacToeGame();
+        for(int i = 0; i < game.getGameBoard().getBoard().length; i++){
+            game.getGameBoard().placePiece('X', i);
+            Assertions.assertEquals('X', game.index(i));
         }
 
         //test 'O'
-        for(int i=0; i<game.getGameBoard().length; i++){
-            game.placePiece('O', i);
-            assertEquals('O', game.index(i));
+        for(int i = 0; i < game.getGameBoard().getBoard().length; i++){
+            game.getGameBoard().placePiece('O', i);
+            Assertions.assertEquals('O', game.index(i));
         }
     }
 
-    //passes IFF
-    //1 finds every empty
-    //2 Does not detect squares as empty if they have content
-    //findEmpties returns an ArrayList<Integer> with LOCATION of empty squares
+    /**
+     * Tests the find all empties sub functions.
+     */
     @Test
-    void findEmpties() {
-        TicTacToeGame emptyBoard = new TicTacToeGame();
+    void findEmptyNumber() {
+        TicTacToeBoard emptyBoard = new TicTacToeBoard();
+        Assertions.assertTrue(validateEmptyNumber(emptyBoard, 9));
 
-        //declaring using a char array constructor because if I make the boards using placePiece that relies on placePiece working
-        TicTacToeGame allXBoard = new TicTacToeGame(new char[]{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'});
-        TicTacToeGame allOBoard = new TicTacToeGame(new char[]{'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'});
-        TicTacToeGame someEmpties = new TicTacToeGame(new char[]{0, 0, 0, 'X', 'O', 0, 0, 'X','O'});
+        TicTacToeBoard allXBoard = new TicTacToeBoard(new char[]{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'});
+        Assertions.assertTrue(validateEmptyNumber(allXBoard, 0));
 
-        assertTrue(validateEmpties(allXBoard));
-        assertTrue(validateEmpties(allOBoard));
-        assertTrue(validateEmpties(emptyBoard));
-        assertTrue(validateEmpties(someEmpties));
+        TicTacToeBoard allOBoard = new TicTacToeBoard(new char[]{'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'});
+        Assertions.assertTrue(validateEmptyNumber(allOBoard, 0));
 
+        TicTacToeBoard someEmpties = new TicTacToeBoard(new char[]{' ', ' ', ' ', 'X', 'O', ' ', ' ', 'X','O'});
+        Assertions.assertTrue(validateEmptyNumber(someEmpties, 5));
     }
 
     //a helper method for findEmpties()
-    boolean validateEmpties(TicTacToeGame board){
+    boolean validateEmptyNumber(TicTacToeBoard board, int n){
         //empty character is declared in case it is refactored.
         //originally I put the value in the loop but interestingly '0'==0 even if they are both chars
         //while 0==(char) 0 returns true.
         //since an empty game board is initialized as charArray of 0 not a charArray of '0' this matters
-        char empty = 0;
-        char[] boardChars = board.getGameBoard();
+
+        char[] boardChars = board.getBoard();
         ArrayList<Integer> emptyLocations = board.findEmpties();
-        for(int i=0; i < emptyLocations.size();i++){
+        int totalEmpties = 0;
+        for (int i = 0; i < emptyLocations.size(); i++) {
             //take each empty location and see if it is actually empty in the board.
             int loc = emptyLocations.get(i);
-            if(boardChars[loc]!=empty){
-                return false;
+            if (boardChars[loc] == ' ') {
+                totalEmpties++;
             }
         }
-        return true;
-
+        return totalEmpties == n;
     }
 }
