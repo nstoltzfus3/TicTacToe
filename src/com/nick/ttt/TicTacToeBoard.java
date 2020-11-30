@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TicTacToeBoard {
-
     private char[] board;
     private ArrayList<int[]> winConditions;
     private HashMap<Character, Integer> charToInt;
-
-
 
     public TicTacToeBoard() {
         this.board = new char[]{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
@@ -46,12 +43,10 @@ public class TicTacToeBoard {
 
     public void initializeCharToInts() {
         this.charToInt = new HashMap<>();
-        charToInt.put('x', -1);
-        charToInt.put('o', 1);
+        charToInt.put('X', -1);
+        charToInt.put('O', 1);
         charToInt.put(' ', 0);
     }
-
-
 
     public ArrayList<int[]> getWinConditions() {
         return this.winConditions;

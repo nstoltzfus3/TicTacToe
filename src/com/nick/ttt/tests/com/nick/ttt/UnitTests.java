@@ -7,11 +7,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 class UnitTests {
-
-
     /**
      * Tests placing a single piece on an empty board.
      */
+
     @Test
     void placePiece() {
         TicTacToeGame game = new TicTacToeGame();
@@ -48,8 +47,8 @@ class UnitTests {
     //a helper method for findEmpties()
     boolean validateEmptyNumber(TicTacToeBoard board, int n){
         //empty character is declared in case it is refactored.
-        //originally I put the value in the loop but interestingly '0'==0 returns false
-        //while '0'==(char) 0 returns true.
+        //originally I put the value in the loop but interestingly '0'==0 even if they are both chars
+        //while 0==(char) 0 returns true.
         //since an empty game board is initialized as charArray of 0 not a charArray of '0' this matters
 
         char[] boardChars = board.getBoard();
