@@ -10,7 +10,7 @@ class UnitTests {
     /**
      * Tests placing a single piece on an empty board.
      */
->>>>>>> upstream/nickChanges
+
     @Test
     void placePiece() {
         TicTacToeGame game = new TicTacToeGame();

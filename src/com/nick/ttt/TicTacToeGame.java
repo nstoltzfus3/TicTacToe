@@ -19,6 +19,10 @@ public class TicTacToeGame {
         return this.gameBoard;
     }
 
+    public void setGameBoard(TicTacToeBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
     public char index(int ref) {
         return this.getGameBoard().getBoard()[ref];
     }
@@ -34,8 +38,8 @@ public class TicTacToeGame {
 
     public void twoPlayer() {
         Scanner sc = new Scanner(System.in);
-        Player playerOne = new Player('O', false);
-        Player playerTwo = new Player('X', false);
+        Player playerOne = new Player('X', false);
+        Player playerTwo = new Player('O', false);
         this.players = new Player[]{playerOne, playerTwo};
 
         System.out.print("Enter a name for player 1: ");
@@ -45,16 +49,33 @@ public class TicTacToeGame {
 
         boolean gameOver = false;
         do {
-            for (Player player : players) {
+            for (int i=0; i < players.length; i++) {
+                boolean error = false; //used to prevent going too far back if there are multiple invalid inputs
+                Player player = players[i];
+
+                System.out.print(player.getName() + ", it's your turn. Pick a move: ");
+                Integer moveLocation = Integer.parseInt(sc.next());
+                ArrayList<Integer> empties = getGameBoard().findEmpties();
+
+                if(empties.contains(moveLocation))
+                {
+                    this.getGameBoard().placePiece(player.getSymbol(), moveLocation);
+                } else{
+                    System.out.println("Not a valid location");
+                    if(!error){ //is there a better way to do this maybe using modulo?
+                        i--;
+                        error=true;
+                    }
+                }
+
+                this.drawBoard();
                 if (this.getGameBoard().gameWon()) {
                     System.out.println(player.getName() + " is the winner!!!");
                     gameOver = true;
-                    continue;
+                    break;
                 }
-                System.out.print(player.getName() + ", it's your turn. Pick a move: ");
-                this.getGameBoard().placePiece(player.getSymbol(), Integer.parseInt(sc.next()));
-                this.drawBoard();
             }
+
         } while (!gameOver);
     }
 
