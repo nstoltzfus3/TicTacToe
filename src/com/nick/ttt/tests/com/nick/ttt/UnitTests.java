@@ -63,4 +63,34 @@ class UnitTests {
         }
         return totalEmpties == n;
     }
+
+    @Test
+    void gameWon() {
+        TicTacToeBoard xWinInARow = new TicTacToeBoard();
+        xWinInARow.placePiece('X', 0);
+        xWinInARow.placePiece('O', 4);
+        xWinInARow.placePiece('X', 2);
+        xWinInARow.placePiece('O', 5);
+        xWinInARow.placePiece('X', 1);
+        Assertions.assertTrue(xWinInARow.gameWon());
+
+        TicTacToeBoard xWinInAColumn = new TicTacToeBoard();
+        xWinInAColumn.placePiece('X', 0);
+        xWinInAColumn.placePiece('O', 1);
+        xWinInAColumn.placePiece('X', 8);
+        xWinInAColumn.placePiece('O', 5);
+        xWinInAColumn.placePiece('X', 6);
+        xWinInAColumn.placePiece('O', 7);
+        xWinInAColumn.placePiece('X', 3);
+        Assertions.assertTrue(xWinInAColumn.gameWon());
+
+        TicTacToeBoard oWinOnADiagonal = new TicTacToeBoard();
+        oWinOnADiagonal.placePiece('X', 1);
+        oWinOnADiagonal.placePiece('O', 0);
+        oWinOnADiagonal.placePiece('X', 3);
+        oWinOnADiagonal.placePiece('O', 4);
+        oWinOnADiagonal.placePiece('X', 6);
+        oWinOnADiagonal.placePiece('O', 8);
+        Assertions.assertTrue(oWinOnADiagonal.gameWon());
+    }
 }
