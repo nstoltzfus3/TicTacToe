@@ -20,9 +20,10 @@ class UnitTests {
         }
 
         //test 'O'
-        for(int i = 0; i < game.getGameBoard().getBoard().length; i++){
-            game.getGameBoard().placePiece('O', i);
-            Assertions.assertEquals('O', game.index(i));
+        TicTacToeGame game1 = new TicTacToeGame();
+        for(int i = 0; i < game1.getGameBoard().getBoard().length; i++){
+            game1.getGameBoard().placePiece('O', i);
+            Assertions.assertEquals('O', game1.index(i));
         }
     }
 
