@@ -56,9 +56,20 @@ public class TicTacToeBoard {
         return charToInt;
     }
 
-    public void placePiece(char xo, int pos) {
-        this.getBoard()[pos] = xo;
+    public boolean placePiece(char xo, int pos) {
+        if (moveIsValid(pos)) {
+            this.getBoard()[pos] = xo;
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    public boolean moveIsValid(int pos) {
+        ArrayList<Integer> a =  this.findEmpties(); // validationr
+        return a.contains(pos);
+    }
+
 
     public ArrayList<Integer> findEmpties() {
         ArrayList<Integer> empties = new ArrayList<>();
@@ -90,5 +101,14 @@ public class TicTacToeBoard {
             }
         }
         return false;
+    }
+
+    public void drawBoard() { // visual display for the human
+        char[] board = this.getBoard();
+        System.out.println(" " + board[0] + " ¦ " + board[1] + " ¦ " + board[2]);
+        System.out.println("---+---+---");
+        System.out.println(" " + board[3] + " ¦ " + board[4] + " ¦ " + board[5]);
+        System.out.println("---+---+---");
+        System.out.println(" " + board[6] + " ¦ " + board[7] + " ¦ " + board[8]);
     }
 }

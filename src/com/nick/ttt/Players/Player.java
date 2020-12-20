@@ -1,7 +1,9 @@
-package com.nick.ttt;
+package com.nick.ttt.Players;
+
+import com.nick.ttt.TicTacToeBoard;
 
 // maybe we'll extend this later and make an AIPlayerClass and a HumanPlayerClass
-public class Player {
+public abstract class Player {
 
     private String name;
     private boolean isAI;
@@ -31,4 +33,6 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
+
+    public abstract void makeMove(TicTacToeBoard board);
 }

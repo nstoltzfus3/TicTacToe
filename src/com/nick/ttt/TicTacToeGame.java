@@ -1,6 +1,9 @@
 package com.nick.ttt;
 
-import javax.security.auth.callback.TextInputCallback;
+import com.nick.ttt.Players.HumanPlayer;
+import com.nick.ttt.Players.Player;
+import com.nick.ttt.Players.RandomAIPlayer;
+
 import java.util.*;
 
 public class TicTacToeGame {
@@ -27,19 +30,14 @@ public class TicTacToeGame {
         return this.getGameBoard().getBoard()[ref];
     }
 
-    public void drawBoard() { // visual display for the human
-        char[] board = this.getGameBoard().getBoard();
-        System.out.println(" " + board[0] + " ¦ " + board[1] + " ¦ " + board[2]);
-        System.out.println("---+---+---");
-        System.out.println(" " + board[3] + " ¦ " + board[4] + " ¦ " + board[5]);
-        System.out.println("---+---+---");
-        System.out.println(" " + board[6] + " ¦ " + board[7] + " ¦ " + board[8]);
-    }
+
 
     public void twoPlayer() {
         Scanner sc = new Scanner(System.in);
-        Player playerOne = new Player('X', false);
-        Player playerTwo = new Player('O', false);
+
+        Player playerOne = new HumanPlayer('X', false);
+        Player playerTwo = new HumanPlayer('O', false);
+
         this.players = new Player[]{playerOne, playerTwo};
 
         System.out.print("Enter a name for player 1: ");
@@ -50,22 +48,42 @@ public class TicTacToeGame {
         boolean gameOver = false;
         do {
             for (Player player : players) {
-                System.out.print(player.getName() + ", it's your turn. Pick a move: ");
+                System.out.println(player.getName() + ", it's your turn. Pick a move: ");
 
-                boolean valid = false;
+                player.makeMove(this.getGameBoard());
+                this.getGameBoard().drawBoard();
 
-                while (!valid) {
-                    Integer moveLocation = Integer.parseInt(sc.next());
-                    ArrayList<Integer> empties = getGameBoard().findEmpties();
-                    if (empties.contains(moveLocation)) {
-                        this.getGameBoard().placePiece(player.getSymbol(), moveLocation);
-                        valid = true;
-                    } else {
-                        System.out.print("Not a valid location, " + player.getName() + ", pick another. ");
-                    }
+                if (this.getGameBoard().gameWon()) {
+                    System.out.println(player.getName() + " is the winner!!!");
+                    gameOver = true;
+                    break;
                 }
+            }
 
-                this.drawBoard();
+        } while (!gameOver);
+    }
+
+    public void onePlayer() {
+        Scanner sc = new Scanner(System.in);
+
+
+        Player playerOne = new HumanPlayer('X', false);
+        Player playerTwo = new RandomAIPlayer('O', false);
+
+        this.players = new Player[]{playerOne, playerTwo};
+
+        System.out.print("Enter a name for player 1: ");
+        playerOne.setName(sc.next());
+        playerTwo.setName("Random AI Destructor");
+
+        boolean gameOver = false;
+        do {
+            for (Player player : players) {
+                System.out.println(player.getName() + ", it's your turn. Pick a move: ");
+                this.getGameBoard().drawBoard();
+                player.makeMove(this.getGameBoard());
+
+
                 if (this.getGameBoard().gameWon()) {
                     System.out.println(player.getName() + " is the winner!!!");
                     gameOver = true;
@@ -84,9 +102,27 @@ public class TicTacToeGame {
                 "below.");
         TicTacToeGame sample = new TicTacToeGame();
         sample.setGameBoard(new TicTacToeBoard(new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8'}));
-        sample.drawBoard();
+        sample.getGameBoard().drawBoard();
 
         TicTacToeGame ttt = new TicTacToeGame();
-        ttt.twoPlayer();
+
+
+        Scanner myScan = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Would you like to play vs a human or a AI (1 = human, 2 = AI). If you are done playing, enter 'q'.");
+            String response = myScan.next();
+            if (response.equals("q")) {
+                break;
+            }
+            if (Integer.parseInt(response) == 1) {
+                ttt.twoPlayer();
+            } else if (Integer.parseInt(response) == 2) {
+                ttt.onePlayer();
+            } else {
+                System.out.print("Please enter a valid number, enjoy!");
+            }
+        }
+
     }
 }
