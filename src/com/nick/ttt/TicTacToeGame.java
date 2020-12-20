@@ -49,22 +49,19 @@ public class TicTacToeGame {
 
         boolean gameOver = false;
         do {
-            for (int i=0; i < players.length; i++) {
-                boolean error = false; //used to prevent going too far back if there are multiple invalid inputs
-                Player player = players[i];
-
+            for (Player player : players) {
                 System.out.print(player.getName() + ", it's your turn. Pick a move: ");
-                Integer moveLocation = Integer.parseInt(sc.next());
-                ArrayList<Integer> empties = getGameBoard().findEmpties();
 
-                if(empties.contains(moveLocation))
-                {
-                    this.getGameBoard().placePiece(player.getSymbol(), moveLocation);
-                } else{
-                    System.out.println("Not a valid location");
-                    if(!error){ //is there a better way to do this maybe using modulo?
-                        i--;
-                        error=true;
+                boolean valid = false;
+
+                while (!valid) {
+                    Integer moveLocation = Integer.parseInt(sc.next());
+                    ArrayList<Integer> empties = getGameBoard().findEmpties();
+                    if (empties.contains(moveLocation)) {
+                        this.getGameBoard().placePiece(player.getSymbol(), moveLocation);
+                        valid = true;
+                    } else {
+                        System.out.print("Not a valid location, " + player.getName() + ", pick another. ");
                     }
                 }
 
